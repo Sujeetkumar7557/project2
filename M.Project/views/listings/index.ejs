@@ -1,0 +1,37 @@
+<% layout("/layouts/boilerplate") %>
+<% if (success && success.length) { %>
+  <div class="alert alert-success text-center" role="alert"><%= success[0] %></div>
+<% } %>
+<div class="listing-page">
+  <div class="listing-grid">
+    <div class="row">
+      <% for (let listing of allListings) { %>
+        <% const listingImage = listing.image && listing.image.url ? listing.image.url : "https://theguardianchronicle.com/wp-content/uploads/2026/07/featured-9.jpg"; %>
+        <div class="card listing-card">
+          <a href="/listings/<%= listing._id %>" class="listing-link">
+            <img
+              src="<%= listingImage %>"
+              class="card-img-top"
+              alt="<%= listing.title %>"
+            />
+
+            <div class="card-body">
+              <p class="card-text">
+                <strong><%= listing.title %></strong><br />
+                &#8377; <%= listing.price != null ? listing.price.toLocaleString("en-IN") : "Price unavailable" %> /night
+              </p>
+            </div>
+          </a>
+          <% if (currUser && listing.owner && currUser._id.equals(listing.owner)) { %>
+            <div class="listing-actions d-flex gap-2 p-3 pt-0">
+              <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
+              <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
