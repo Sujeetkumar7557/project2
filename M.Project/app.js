@@ -2,6 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
+const fs = require("fs");
+const envPath = path.join(__dirname, ".env");
+if (fs.existsSync(envPath)) {
+  process.loadEnvFile(envPath);
+}
+
 const methodOverride = require("method-override");
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const ejsMate = require("ejs-mate");

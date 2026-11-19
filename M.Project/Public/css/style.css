@@ -186,3 +186,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     overflow-wrap: anywhere;
 }
+
+
+/* map */
+#map {height: 400px; width: 80vh;}
